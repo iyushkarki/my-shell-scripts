@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ $# -gt 1 ]; then
+    echo "Just two argument is allowed kid"
+fi
+
+echo "Executed Command :"
+
+git checkout -b old/"$1"
+
+echo "Executed Command :"
+
+git branch -D "$1"
+
+echo "Executed Command :"
+git fetch origin "$1"
+
+echo "Executed Command :"
+git checkout "$1"
+
+echo "Do you want to delete the old $1 branch?"
+
+read -r answer
+
+if [ "$answer" = "yes" ]; then 
+
+git branch -D old/"$1"
+
+fi

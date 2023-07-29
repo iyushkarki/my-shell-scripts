@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -gt 1 ]; then
+    echo "Just two argument is allowed kid"
+fi
+
+git rebase -i HEAD~"$1"
+

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+current_branch=$(git symbolic-ref --short HEAD)
+
+echo "Do you want to clean all the branches?"
+
+read -r answer
+
+echo "Executed Command :"
+
+if [ "$answer" = "yes" ]; then 
+
+git branch | grep -v "$current_branch" | xargs git branch -D
+
+if [ "$?" -eq 0 ]; then 
+echo "Clean successfull"
+
+fi
+
+exit
+fi
+
+echo "Answer is not satisfied, cleaning reverted."

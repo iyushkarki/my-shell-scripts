@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Executed Command :"
+git branch -D main 
+
+echo "Executed Command :"
+git fetch origin main:main 
+
+echo "Executed Command :"
+git checkout main

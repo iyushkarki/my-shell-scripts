@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function _auto_completion {
+    local CURRENT_WORD
+    local AVAILABLE_COMMANDS="freshmain rebase"
+    CURRENT_WORD="${COMP_WORDS[COMP_CWORD]}"
+
+    if [[ "$COMP_CWORD" -eq 1 ]]; then
+        # Generate completions for the "--option" argument
+        COMPREPLY=("$(compgen -W "$AVAILABLE_COMMANDS" -- "$CURRENT_WORD")")
+
+    else
+        # COMPREPLY=("ls")
+        echo "$AVAILABLE_COMMANDS"
+
+        # Default completions for other arguments or options
+        # COMPREPLY=('freshMain')
+    fi
+}
+
+complete -F _auto_completion automate
+
+if [ "$1" = "rebase" ]; then
+    git rebase -i HEAD~"$2"
+fi
+
+if [ "$1" = "freshmain " ]; then
+    git branch -D main && git fetch origin main:main && git checkout main
+fi
+
+if [ $# -gt 2 ]; then
+    echo "Just two argument is allowed kid"
+fi
