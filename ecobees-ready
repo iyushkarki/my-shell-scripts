@@ -2,4 +2,4 @@
 
 ssh-add -D 
 
-ssh-add ~/.ssh/ecoAayush
+ssh-add ~/.ssh/ecobeesAayush
