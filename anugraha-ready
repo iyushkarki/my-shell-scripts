@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ssh-add -D 
+
+ssh-add ~/.ssh/anugraha
+

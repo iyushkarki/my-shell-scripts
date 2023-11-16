@@ -31,3 +31,52 @@ fi
 if [ $# -gt 2 ]; then
     echo "Just two argument is allowed kid"
 fi
+
+
+
+### dummy example for deployment without CICD
+
+#!/bin/bash
+
+eval "$(ssh-agent -s)" 
+
+ssh-add ~/.ssh/adventure-admin
+
+cd apps/pointstore/api/ || exit
+
+git checkout -b oldMain || echo "proceeding to next step"
+
+git branch -D main || echo "no main branch found proceeding to next step"
+
+git fetch origin main:main && git checkout main 
+
+git branch -D oldMain
+
+npm install 
+
+pm2 stop api
+
+npm run build:prod
+
+if [ $? -ne 0 ]; then
+
+    echo "build failed please resolve build issue"
+    pm2 restart api
+    exit 
+
+fi
+
+pm2 restart api
+
+if [ $? -eq 0 ]; then
+
+    echo "Deploy successful changes will take effect in about 10 seconds."
+
+    echo "Please exit the session using 'exit' command whenever you are ready."
+
+    echo "Thank You"
+
+fi  
+
+
+#export PATH=/home/smthsmth:$PATH 

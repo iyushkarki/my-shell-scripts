@@ -1,0 +1,17 @@
+#!/bin/bash
+
+ID="${1:-3000}" 
+
+PID=$(sudo lsof -t -i:$ID)
+
+if $PID 
+    then 
+        echo killing PID $PID
+fi
+
+if $PID eq ""
+    then
+        echo No PID found
+fi
+
+sudo kill -9 $PID
