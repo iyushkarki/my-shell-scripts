@@ -1,6 +1,16 @@
 #!/bin/bash
 
-ssh-add -D 
+if [ "$#" -gt 1 ]; then
+    echo "Just two arguments are allowed."
+    exit 1
+fi
 
-ssh-add ~/.ssh/anugraha
-
+if [ "$1" = "0" ]; then
+    ssh-add -D
+    ssh-add ~/.ssh/anugraha
+elif [ "$1" = "1" ]; then
+    ssh-add -D
+    ssh-add ~/.ssh/resAnugraha
+else
+    echo 'Could not ready the user.'
+fi

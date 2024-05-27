@@ -1,6 +1,14 @@
-#!/bin/bash
+if [ "$#" -gt 1 ]; then
+    echo "Just two arguments are allowed."
+    exit 1
+fi
 
-ssh-add -D 
-
-ssh-add ~/.ssh/personal
-
+if [ "$1" = "0" ]; then
+    ssh-add -D
+    ssh-add ~/.ssh/personal
+elif [ "$1" = "1" ]; then
+    ssh-add -D
+    ssh-add ~/.ssh/ecobeesAayush
+else
+    echo 'Could not ready the user.'
+fi

@@ -8,6 +8,11 @@ fi
 if [ "$1" -eq 0 ]; then
     git config user.name "Aayush Karki"
     git config user.email "aayush.ecobees@gmail.com"
+
+elif [ "$1" -eq 2 ]; then
+    git config user.name "Anugraha Acharya"
+    git config user.email "anugraha@resbutler.com"
+
 else
     echo 'Could not register the user or wrong argument.'
 fi
