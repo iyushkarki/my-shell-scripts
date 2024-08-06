@@ -1,18 +1,44 @@
 #!/bin/bash
 
-if [ $# -gt 1 ]; then
-    echo "Just two arguments are allowed."
-    exit 1
-fi
+show_git_user_to_register() {
+    # Use whiptail to create a menu
+    CHOICE=$(whiptail --title "Git User Configuration" \
+                      --menu "Choose a user to configure Git" 15 50 4 \
+                      "0" "Aayush Karki" \
+                      "1" "Aayush ecobees" \
+                      "2" "Anugraha Acharya (dss)" \
+                      3>&1 1>&2 2>&3)
+    
+    # Check the exit status of whiptail
+    if [ $? -ne 0 ]; then
+        echo "Operation canceled."
+        exit 1
+    fi
 
-if [ "$1" -eq 0 ]; then
-    git config user.name "Aayush Karki"
-    git config user.email "aayush.ecobees@gmail.com"
+    # Perform actions based on user choice
+    case $CHOICE in
+        0)
+            git config user.name "Aayush Karki"
+            git config user.email "aayush.karki022@gmail.com"
+            ;;
+        1)
+            git config user.name "Aayush Karki"
+            git config user.email "aayush.ecobees@gmail.com"
+            ;;
+        2)
+            git config user.name "Anugraha Acharya"
+            git config user.email "anugraha@dss.com.mm"
+            ;;
+        *)
+            echo "Invalid selection."
+            exit 1
+            ;;
+    esac
 
-elif [ "$1" -eq 2 ]; then
-    git config user.name "Anugraha Acharya"
-    git config user.email "anugraha@resbutler.com"
+    echo "Git user configuration added. $CHOICE"
+    
+    git config --list
+}
 
-else
-    echo 'Could not register the user or wrong argument.'
-fi
+# Execute the menu function
+show_git_user_to_register
